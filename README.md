@@ -22,8 +22,8 @@ $service = new Service([
 use unapi\fns\uwsfind\Declaration;
 use unapi\fns\uwsfind\requests;
 
-/** @var Declaration[] $executions */
-$executions = $service->findDeclarations(
+/** @var Declaration[] $declarations */
+$declarations = $service->findDeclarations(
   new requests\ByLegalRequest('1027700070518')
 )->wait();
 ```
