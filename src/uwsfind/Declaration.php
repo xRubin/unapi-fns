@@ -25,6 +25,8 @@ class Declaration implements DeclarationInterface
     private $declarationTransport;
     /** @var null|string */
     private $ifns;
+    /** @var null|string */
+    private $declarationDecision;
 
     /**
      * @param null|DateTimeInterface $declarationDate
@@ -36,8 +38,19 @@ class Declaration implements DeclarationInterface
      * @param null|string $ogrn
      * @param null|string $declarationTransport
      * @param null|string $ifns
+     * @param null|string $declarationDecision
      */
-    public function __construct(DateTimeInterface $declarationDate = null, DateTimeInterface $readyDate = null, string $declarationForm = null, string $action = null, string $legalName = null, string $declarationNumber = null, string $ogrn = null, string $declarationTransport = null, string $ifns = null)
+    public function __construct(
+        DateTimeInterface $declarationDate = null,
+        DateTimeInterface $readyDate = null,
+        string $declarationForm = null,
+        string $action = null,
+        string $legalName = null,
+        string $declarationNumber = null,
+        string $ogrn = null,
+        string $declarationTransport = null,
+        string $ifns = null,
+        string $declarationDecision = null)
     {
         $this->declarationDate = $declarationDate;
         $this->readyDate = $readyDate;
@@ -48,6 +61,7 @@ class Declaration implements DeclarationInterface
         $this->ogrn = $ogrn;
         $this->declarationTransport = $declarationTransport;
         $this->ifns = $ifns;
+        $this->declarationDecision = $declarationDecision;
     }
 
     /**
@@ -123,6 +137,14 @@ class Declaration implements DeclarationInterface
     }
 
     /**
+     * @return null|string
+     */
+    public function getDeclarationDecision(): ?string
+    {
+        return $this->declarationDecision;
+    }
+
+    /**
      * @param mixed $data
      * @return DeclarationInterface
      */
@@ -137,7 +159,8 @@ class Declaration implements DeclarationInterface
             @$data->NUM,
             @$data->OG,
             @$data->PREDST,
-            @$data->REG
+            @$data->REG,
+            @$data->VR
         );
     }
 }
