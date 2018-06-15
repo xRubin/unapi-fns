@@ -16,7 +16,7 @@ $service = new Service([
 ]);
 ```
 
-### Поиск Документов по юридическому лицу
+### Поиск документов по юридическому лицу
 
 ```php
 use unapi\fns\uwsfind\Declaration;
@@ -27,3 +27,17 @@ $declarations = $service->findDeclarations(
   new requests\ByLegalRequest('1027700070518')
 )->wait();
 ```
+
+### Поиск документов об индивидуальном предпринимателе
+
+```php
+use unapi\fns\uwsfind\Declaration;
+use unapi\fns\uwsfind\requests;
+
+/** @var Declaration[] $declarations */
+$declarations = $service->findDeclarations(
+  new requests\BySoleProprietorRequest('312504026800041')
+)->wait();
+```
+
+Дополнительно в конструктор запроса могут передаваться форма документа, ИФНС, период поиска.

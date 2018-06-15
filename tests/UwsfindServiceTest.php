@@ -105,4 +105,37 @@ class UwsfindServiceTest extends TestCase
             'VR' => 'Решение об отказе в государственной регистрации'
         ]), $declarations[0]);
     }
+
+    public function testFindDeclarationsBySoleProprietor()
+    {
+        $service = $this->getService(
+            HandlerStack::create(
+                new MockHandler([
+                    new Response(200, [], file_get_contents(__DIR__ . '/responses/uwsfind/service-initial')), // as initial page
+                    new Response(200, [], file_get_contents(__DIR__ . '/responses/uwsfind/service-sole-data')),
+                ])
+            )
+        );
+
+        /** @var Declaration[] $declarations */
+        $declarations = $service->findDeclarations(
+            new requests\BySoleProprietorRequest('312504026800041', null, null, null, new DateTime('04.05.2018'), new DateTime('11.05.2018'))
+        )->wait();
+
+        $this->assertInternalType('array', $declarations);
+        $this->assertCount(1, $declarations);
+        $this->assertEquals(Declaration::toDto((object)[
+            'DT' => '08.05.2018',
+            'DTGOTOV' => '17.05.2018',
+            'DTR' => '18.09.2017"',
+            'FR' => 'Р24001',
+            'GRN' => '6177748870403',
+            'NM' => 'АНИСИМОВА АЛЕКСАНДРА ЮРЬЕВНА',
+            'NUM' => '3208А',
+            'OG' => '312504026800041',
+            'PREDST' => 'В электронном виде',
+            'REG' => 'Межрайонная ИФНС России №17 по Московской области',
+            'VR' => 'Решение о государственной регистрации. ГРНИП внесенной записи 418502700286104'
+        ]), $declarations[0]);
+    }
 }
