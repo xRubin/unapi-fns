@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/xRubin/unapi-fssp.svg?branch=master)](https://travis-ci.org/xRubin/unapi-fssp)
+[![Build Status](https://travis-ci.org/xRubin/unapi-fns.svg?branch=master)](https://travis-ci.org/xRubin/unapi-fns)
 # Unapi FNS
 Модуль для работы с сервисами [Федеральной налоговой службы](https://www.nalog.ru)
 
